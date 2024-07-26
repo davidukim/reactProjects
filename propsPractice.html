@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id = "root"></div>
+</body>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.js"></script>
+<script type = 'text/babel'>
+    const root = document.getElementById("root");
+
+    const Btn = ({string, count, onClick}) => {
+        console.log("component re-rendered");
+        return (
+            <div>
+                <button onClick={onClick}>{string} is my string and value is {count}</button>
+            </div>);
+    }
+    
+
+    Btn.propTypes = {
+        string: PropTypes.string,
+        count: PropTypes.number
+    }
+
+    const MemorizeApp = React.memo(Btn);
+
+
+
+    function MyApp(){
+        let [count, setCount] = React.useState(0);
+
+        let [inputSaved, setInput] = React.useState("nothing to see here");
+        let [BtnString, setBtnString] = React.useState("nothing to see here");
+
+        const handleClick = () =>{
+            setCount(count => count + 1);
+        }
+
+        const handleEnter = (event) =>{
+            if (event.key == 'Enter'){
+                setBtnString(inputSaved);
+                setInput("");
+            }
+        }
+
+
+        const handleBtnString = (event) =>{
+            setInput(event.target.value);
+        }
+
+        return (
+            <div>
+                <input placeholder={BtnString} type="text" onKeyDown={handleEnter} onChange={handleBtnString}></input>
+                <MemorizeApp count={count} onClick={handleClick} string={BtnString}/>
+            </div>
+        )
+    }
+
+
+
+    ReactDOM.render(<MyApp/>, root);
+</script>
+</html>
