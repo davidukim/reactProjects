@@ -1,0 +1,8 @@
+.btn{
+    color : white;
+    background-color: tomato;
+}
+
+.btn:hover {
+    background-color: darkmagenta;
+}
