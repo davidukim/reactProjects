@@ -3,13 +3,20 @@ import './App.css';
 import Button from './Button';
 import Movie from './components/Movie';
 import Home from './routes/Home';
+import Detail from './routes/Detail';
 import {
-  createBrowserRouter,
-  RouterProvider,
+  BrowserRouter,
+  Routes,
+  Route,
 } from "react-router-dom";
 
 function App() {
-  return <Home/>;
+  return <BrowserRouter>
+    <Routes>
+      <Route path="/movie" element={<Detail/>}/>
+      <Route path="/" element={<Home/>}/>
+    </Routes>
+  </BrowserRouter>
 }
 
 
