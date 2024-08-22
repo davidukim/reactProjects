@@ -27,6 +27,7 @@ function Detail(){
                 <h2>{movie.title}</h2>
                 <img src={movie.medium_cover_image}></img>
                 <p>{movie.description_intro}</p>
+                <p>{movie.summary}</p>
             </div>
         }
     </div>
